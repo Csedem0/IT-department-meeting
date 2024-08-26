@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Department Meeting Agenda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+        }
+
+        h1,
+        h2 {
+            color: #2c3e50;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            border-bottom: 1px solid #2c3e50;
+            padding-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 16px;
+        }
+
+        ul,
+        ol {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: calc(100% - 20px);
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 50px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #2c3e50;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 10px auto;
+        }
+
+        button:hover {
+            background-color: #34495e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .logo-holder {
+            display: flex;
+            align-items: center;
+        }
+
+        .img {
+            height: 80px;
+            width: 80px;
+            margin-right: 10px;
+        }
+
+        #signatureCanvas {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+            height: 80px;
+            margin-bottom: 5px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #clearSignature {
+            background-color: #e74c3c;
+        }
+
+        #clearSignature:hover {
+            background-color: #c0392b;
+        }
+
+        .form-section {
+            border: 1px solid #2c3e50;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        .form-section h2 {
+            border-bottom: 1px solid #2c3e50;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .topic-item {
+            border: 1px solid #2c3e50;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .topic-item h3 {
+            margin-top: 0;
+        }
+
+        #addTopic,
+        #removeTopic {
+            margin: 10px auto;
+            display: block;
+        }
+
+        .form-footer {
+            text-align: center;
+        }
+
+        .attendee-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #addAttendee,
+        #removeAttendee {
+            width: 48%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo-holder">
+        <img src="rahlogo.jpg" alt="Company Logo" class="img">
+        <h2>RAH Real Estate Development Company International Limited</h2>
+        <p>Website: <a href="http://www.rahrealestate.org">www.rahrealestate.org</a></p>
+    </div>
+
+    <div class="form-section">
+        <h1>IT Department Meeting Agenda</h1>
+    </div>
+
+    <div class="form-section">
+        <h2>MEETING AGENDA</h2>
+        <form id="meetingForm">
+            <div class="form-section">
+                <ul>
+                    <li><strong>Date:</strong><br><input type="text" id="date" name="date" value="" required></li>
+                    <li><strong>Last Meeting:</strong><br><input type="text" id="lastMeeting" name="lastMeeting" value=""
+                            required></li>
+                    <li><strong>Purpose of Meeting:</strong><br><input type="text" id="purpose" name="purpose" value=""
+                            required></li>
+                    <li><strong>Time:</strong><br><input type="text" id="time" name="time" value="" required></li>
+                    <li><strong>Location:</strong><br><input type="text" id="location" name="location" value="" required>
+                    </li>
+                    <li><strong>Chair:</strong><br><input type="text" id="chair" name="chair" value="" required></li>
+                    <li><strong>Secretary:</strong><br><input type="text" id="secretary" name="secretary" value=""
+                            required></li>
+                </ul>
+            </div>
+
+            <div class="form-section">
+                <h2>Summary of Last Meeting</h2>
+                <textarea id="summaryLastMeeting" name="summaryLastMeeting" rows="4" required></textarea>
+            </div>
+
+            <!-- IT Employee Sections -->
+            <div class="form-section">
+                <h2>IT Department</h2>
+                
+                <!-- Tier 1 IT Employees -->
+                <div id="tier1Container" class="form-section">
+                    <h3>Tier 1 IT Employees</h3>
+                    <ol id="tier1List">
+                        <li><input type="text" name="tier1Employee1" value="" required></li>
+                    </ol>
+                    <div class="attendee-buttons">
+                        <button type="button" id="addTier1Employee">Add Tier 1 Employee</button>
+                        <button type="button" id="removeTier1Employee">Remove Tier 1 Employee</button>
+                    </div>
+                </div>
+
+                <!-- Tier 2 IT Employees -->
+                <div id="tier2Container" class="form-section">
+                    <h3>Tier 2 IT Employees</h3>
+                    <ol id="tier2List">
+                        <li><input type="text" name="tier2Employee1" value="" required></li>
+                    </ol>
+                    <div class="attendee-buttons">
+                        <button type="button" id="addTier2Employee">Add Tier 2 Employee</button>
+                        <button type="button" id="removeTier2Employee">Remove Tier 2 Employee</button>
+                    </div>
+                </div>
+
+                <!-- Tier 3 IT Employees -->
+                <div id="tier3Container" class="form-section">
+                    <h3>Tier 3 IT Employees</h3>
+                    <ol id="tier3List">
+                        <li><input type="text" name="tier3Employee1" value="" required></li>
+                    </ol>
+                    <div class="attendee-buttons">
+                        <button type="button" id="addTier3Employee">Add Tier 3 Employee</button>
+                        <button type="button" id="removeTier3Employee">Remove Tier 3 Employee</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Support Sections -->
+            <div class="form-section">
+                <h2>Department Support</h2>
+
+                <!-- Human Resources Department Support -->
+                <div class="form-section">
+                    <h3>Human Resources Department Support</h3>
+                    <ol id="hrSupportList">
+                        <li><input type="text" name="hrSupport1" value="" required></li>
+                    </ol>
+                    <div class="attendee-buttons">
+                        <button type="button" id="addHrSupport">Add HR Support</button>
+                        <button type="button" id="removeHrSupport">Remove HR Support</button>
+                    </div>
+                </div>
+
+                <!-- Accounting Department Support -->
+                <div class="form-section">
+                    <h3>Accounting Department Support</h3>
+                    <ol id="accountingSupportList">
+                        <li><input type="text" name="accountingSupport1" value="" required></li>
+                    </ol>
+                    <div class="attendee-buttons">
+                        <button type="button" id="addAccountingSupport">Add Accounting Support</button>
+                        <button type="button" id="removeAccountingSupport">Remove Accounting Support</button>
+                    </div>
+                </div>
+
+                <!-- Development Department Support -->
+                <div class="form-section">
+                    <h3>Development Department Support</h3>
+                    <ol id="developmentSupportList">
+                        <li><input type="text" name="developmentSupport1" value="" required></li>
+                    </ol>
+                    <div class="attendee-buttons">
+                        <button type="button" id="addDevelopmentSupport">Add Development Support</button>
+                        <button type="button" id="removeDevelopmentSupport">Remove Development Support</button>
+                    </div>
+                </div>
+
+                <!-- Management Department Support -->
+                <div class="form-section">
+                    <h3>Management Department Support</h3>
+                    <ol id="managementSupportList">
+                        <li><input type="text" name="managementSupport1" value="" required></li>
+                    </ol>
+                    <div class="attendee-buttons">
+                        <button type="button" id="addManagementSupport">Add Management Support</button>
+                        <button type="button" id="removeManagementSupport">Remove Management Support</button>
+                    </div>
+                </div>
+
+                <!-- Administrative Department Support -->
+                <div class="form-section">
+                    <h3>Administrative Department Support</h3>
+                    <ol id="administrativeSupportList">
+                        <li><input type="text" name="administrativeSupport1" value="" required></li>
+                    </ol>
+                    <div class="attendee-buttons">
+                        <button type="button" id="addAdministrativeSupport">Add Administrative Support</button>
+                        <button type="button" id="removeAdministrativeSupport">Remove Administrative Support</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Topic Discussion/Meeting Notes</h2>
+                <div id="topicsContainer">
+                    <div class="topic-item" data-topic-number="1">
+                        <h3>Topic 1</h3>
+                        <textarea name="topic1" required></textarea>
+                        <div><strong>Duration (min):</strong><input type="text" name="duration1" required></div>
+                        <div><strong>Note:</strong><textarea name="note1" required></textarea></div>
+                    </div>
+                </div>
+                <button type="button" id="addTopic">Add Topic</button>
+                <button type="button" id="removeTopic">Remove Last Topic</button>
+                <div><strong>Total Meeting Time (min):</strong><input type="text" id="totalTime" name="totalTime"
+                        required></div>
+            </div>
+
+            <div class="form-footer">
+                <p><strong>Prepared By:</strong><br><input type="text" id="preparedBy" name="preparedBy" value=""
+                        required></p>
+                <h2>Signature:</h2>
+                <canvas id="signatureCanvas"></canvas>
+                <button type="button" id="clearSignature">Clear Signature</button>
+                <button type="button" onclick="saveProgress()">Save Progress</button>
+                <button type="button" onclick="generatePDF()">Save as PDF</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        let tier1Count = 1;
+        let tier2Count = 1;
+        let tier3Count = 1;
+        let hrSupportCount = 1;
+        let accountingSupportCount = 1;
+        let developmentSupportCount = 1;
+        let managementSupportCount = 1;
+        let administrativeSupportCount = 1;
+
+        document.getElementById('addTier1Employee').addEventListener('click', () => {
+            tier1Count++;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<input type="text" name="tier1Employee${tier1Count}" required>`;
+            document.getElementById('tier1List').appendChild(listItem);
+        });
+
+        document.getElementById('removeTier1Employee').addEventListener('click', () => {
+            if (tier1Count > 1) {
+                document.getElementById('tier1List').lastElementChild.remove();
+                tier1Count--;
+            }
+        });
+
+        document.getElementById('addTier2Employee').addEventListener('click', () => {
+            tier2Count++;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<input type="text" name="tier2Employee${tier2Count}" required>`;
+            document.getElementById('tier2List').appendChild(listItem);
+        });
+
+        document.getElementById('removeTier2Employee').addEventListener('click', () => {
+            if (tier2Count > 1) {
+                document.getElementById('tier2List').lastElementChild.remove();
+                tier2Count--;
+            }
+        });
+
+        document.getElementById('addTier3Employee').addEventListener('click', () => {
+            tier3Count++;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<input type="text" name="tier3Employee${tier3Count}" required>`;
+            document.getElementById('tier3List').appendChild(listItem);
+        });
+
+        document.getElementById('removeTier3Employee').addEventListener('click', () => {
+            if (tier3Count > 1) {
+                document.getElementById('tier3List').lastElementChild.remove();
+                tier3Count--;
+            }
+        });
+
+        document.getElementById('addHrSupport').addEventListener('click', () => {
+            hrSupportCount++;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<input type="text" name="hrSupport${hrSupportCount}" required>`;
+            document.getElementById('hrSupportList').appendChild(listItem);
+        });
+
+        document.getElementById('removeHrSupport').addEventListener('click', () => {
+            if (hrSupportCount > 1) {
+                document.getElementById('hrSupportList').lastElementChild.remove();
+                hrSupportCount--;
+            }
+        });
+
+        document.getElementById('addAccountingSupport').addEventListener('click', () => {
+            accountingSupportCount++;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<input type="text" name="accountingSupport${accountingSupportCount}" required>`;
+            document.getElementById('accountingSupportList').appendChild(listItem);
+        });
+
+        document.getElementById('removeAccountingSupport').addEventListener('click', () => {
+            if (accountingSupportCount > 1) {
+                document.getElementById('accountingSupportList').lastElementChild.remove();
+                accountingSupportCount--;
+            }
+        });
+
+        document.getElementById('addDevelopmentSupport').addEventListener('click', () => {
+            developmentSupportCount++;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<input type="text" name="developmentSupport${developmentSupportCount}" required>`;
+            document.getElementById('developmentSupportList').appendChild(listItem);
+        });
+
+        document.getElementById('removeDevelopmentSupport').addEventListener('click', () => {
+            if (developmentSupportCount > 1) {
+                document.getElementById('developmentSupportList').lastElementChild.remove();
+                developmentSupportCount--;
+            }
+        });
+
+        document.getElementById('addManagementSupport').addEventListener('click', () => {
+            managementSupportCount++;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<input type="text" name="managementSupport${managementSupportCount}" required>`;
+            document.getElementById('managementSupportList').appendChild(listItem);
+        });
+
+        document.getElementById('removeManagementSupport').addEventListener('click', () => {
+            if (managementSupportCount > 1) {
+                document.getElementById('managementSupportList').lastElementChild.remove();
+                managementSupportCount--;
+            }
+        });
+
+        document.getElementById('addAdministrativeSupport').addEventListener('click', () => {
+            administrativeSupportCount++;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<input type="text" name="administrativeSupport${administrativeSupportCount}" required>`;
+            document.getElementById('administrativeSupportList').appendChild(listItem);
+        });
+
+        document.getElementById('removeAdministrativeSupport').addEventListener('click', () => {
+            if (administrativeSupportCount > 1) {
+                document.getElementById('administrativeSupportList').lastElementChild.remove();
+                administrativeSupportCount--;
+            }
+        });
+
+        // Function to save progress
+        function saveProgress() {
+            const form = document.getElementById('meetingForm');
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            const signature = document.getElementById('signatureCanvas').toDataURL();
+            data.signature = signature;
+            localStorage.setItem('itMeetingFormData', JSON.stringify(data));
+            alert('Progress saved successfully!');
+        }
+
+        // Function to load progress
+        function loadProgress() {
+            const data = JSON.parse(localStorage.getItem('itMeetingFormData'));
+            if (data) {
+                Object.keys(data).forEach(key => {
+                    const element = document.querySelector(`[name="${key}"]`);
+                    if (element) {
+                        element.value = data[key];
+                    }
+                });
+                if (data.signature) {
+                    const canvas = document.getElementById('signatureCanvas');
+                    const ctx = canvas.getContext('2d');
+                    const img = new Image();
+                    img.onload = function () {
+                        ctx.drawImage(img, 0, 0);
+                    }
+                    img.src = data.signature;
+                }
+            }
+        }
+
+        // Function to generate PDF
+        function generatePDF() {
+            const doc = new jsPDF();
+            const titleFontSize = 20;
+            const subtitleFontSize = 14;
+            const textFontSize = 10;
+            const marginLeft = 10;
+            const pageHeight = doc.internal.pageSize.height;
+            let startY = 20;
+
+            function addText(text, fontSize, marginY = 5, lineHeight = 0.5) {
+                const textLines = doc.splitTextToSize(text, 190);
+                doc.setFontSize(fontSize);
+                textLines.forEach((line, index) => {
+                    if (startY + fontSize * lineHeight > pageHeight - 10) {
+                        doc.addPage();
+                        startY = 10;
+                    }
+                    doc.text(line, marginLeft, startY);
+                    startY += fontSize * lineHeight;
+                });
+                startY += marginY;
+            }
+
+            doc.addImage(document.querySelector('.img').src, 'JPEG', marginLeft, startY, 40, 40);
+            startY += 50;
+            addText('RAH Real Estate Development Company International Limited', subtitleFontSize, 10);
+            addText('Website: www.rahrealestate.org', textFontSize, 10);
+
+            addText('IT Department Meeting Agenda', titleFontSize, 4, 1);
+            addText('MEETING AGENDA', subtitleFontSize, 4, 1);
+            addText(`Date: ${document.getElementById('date').value}`, textFontSize, 4, 1);
+            addText(`Last Meeting: ${document.getElementById('lastMeeting').value}`, textFontSize, 4, 1);
+            addText(`Purpose of Meeting: ${document.getElementById('purpose').value}`, textFontSize, 4, 1);
+            addText(`Time: ${document.getElementById('time').value}`, textFontSize, 4, 1);
+            addText(`Location: ${document.getElementById('location').value}`, textFontSize, 4, 1);
+            addText(`Chair: ${document.getElementById('chair').value}`, textFontSize, 4, 1);
+            addText(`Secretary: ${document.getElementById('secretary').value}`, textFontSize, 10, 1);
+            addText('Summary of Last Meeting', subtitleFontSize, 10, 1);
+            addText(`${document.getElementById('summaryLastMeeting').value}`, textFontSize, 5, 1.5);
+
+            addText('Tier 1 IT Employees', subtitleFontSize, 10, 1);
+            for (let i = 1; i <= tier1Count; i++) {
+                addText(`${i}. ${document.querySelector(`input[name="tier1Employee${i}"]`).value}`, textFontSize, 5);
+            }
+
+            addText('Tier 2 IT Employees', subtitleFontSize, 10, 1);
+            for (let i = 1; i <= tier2Count; i++) {
+                addText(`${i}. ${document.querySelector(`input[name="tier2Employee${i}"]`).value}`, textFontSize, 5);
+            }
+
+            addText('Tier 3 IT Employees', subtitleFontSize, 10, 1);
+            for (let i = 1; i <= tier3Count; i++) {
+                addText(`${i}. ${document.querySelector(`input[name="tier3Employee${i}"]`).value}`, textFontSize, 5);
+            }
+
+            addText('Department Support', subtitleFontSize, 10, 1);
+            
+            addText('Human Resources Department Support', subtitleFontSize, 10, 1);
+            for (let i = 1; i <= hrSupportCount; i++) {
+                addText(`${i}. ${document.querySelector(`input[name="hrSupport${i}"]`).value}`, textFontSize, 5);
+            }
+
+            addText('Accounting Department Support', subtitleFontSize, 10, 1);
+            for (let i = 1; i <= accountingSupportCount; i++) {
+                addText(`${i}. ${document.querySelector(`input[name="accountingSupport${i}"]`).value}`, textFontSize, 5);
+            }
+
+            addText('Development Department Support', subtitleFontSize, 10, 1);
+            for (let i = 1; i <= developmentSupportCount; i++) {
+                addText(`${i}. ${document.querySelector(`input[name="developmentSupport${i}"]`).value}`, textFontSize, 5);
+            }
+
+            addText('Management Department Support', subtitleFontSize, 10, 1);
+            for (let i = 1; i <= managementSupportCount; i++) {
+                addText(`${i}. ${document.querySelector(`input[name="managementSupport${i}"]`).value}`, textFontSize, 5);
+            }
+
+            addText('Administrative Department Support', subtitleFontSize, 10, 1);
+            for (let i = 1; i <= administrativeSupportCount; i++) {
+                addText(`${i}. ${document.querySelector(`input[name="administrativeSupport${i}"]`).value}`, textFontSize, 5);
+            }
+
+            addText('Topic Discussion/Meeting Notes', subtitleFontSize, 10, 1);
+
+            const tableData = [];
+            for (let i = 1; i <= document.querySelectorAll('.topic-item').length; i++) {
+                tableData.push([
+                    document.querySelector(`textarea[name="topic${i}"]`).value,
+                    document.querySelector(`input[name="duration${i}"]`).value,
+                    document.querySelector(`textarea[name="note${i}"]`).value
+                ]);
+            }
+
+            tableData.forEach((row, index) => {
+                addText(`Topic ${index + 1}: ${row[0]}`, textFontSize, 4, 0.5);
+                addText(`Duration: ${row[1]} minutes`, textFontSize, 4, 1);
+                addText(`Note: ${row[2]}`, textFontSize, 10, 0.5);
+                doc.setDrawColor(0);
+                doc.line(marginLeft, startY, 200, startY);  // Add a separator line
+                startY += 5;
+            });
+
+            addText(`Total Meeting Time: ${document.getElementById('totalTime').value} minutes`, textFontSize, 10);
+            addText(`Prepared By: ${document.getElementById('preparedBy').value}`, textFontSize, 10);
+
+            const signature = document.getElementById('signatureCanvas').toDataURL('image/png');
+            doc.addImage(signature, 'PNG', marginLeft, startY + 10, 80, 40);
+
+            doc.save('IT_Department_Meeting_Agenda.pdf');
+        }
+
+        // Signature canvas functionality
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+
+        canvas.addEventListener('mousedown', e => {
+            isDrawing = true;
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);
+        });
+
+        canvas.addEventListener('mousemove', e => {
+            if (isDrawing) {
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            if (isDrawing) {
+                ctx.stroke();
+                ctx.closePath();
+                isDrawing = false;
+            }
+        });
+
+        canvas.addEventListener('mouseout', () => {
+            if (isDrawing) {
+                ctx.stroke();
+                ctx.closePath();
+                isDrawing = false;
+            }
+        });
+
+        document.getElementById('clearSignature').addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+
+        document.getElementById('addTopic').addEventListener('click', () => {
+            const topicCount = document.querySelectorAll('.topic-item').length + 1;
+            const topicsContainer = document.getElementById('topicsContainer');
+            const topicItem = document.createElement('div');
+            topicItem.classList.add('topic-item');
+            topicItem.setAttribute('data-topic-number', topicCount);
+            topicItem.innerHTML = `
+                <h3>Topic ${topicCount}</h3>
+                <textarea name="topic${topicCount}" required></textarea>
+                <div><strong>Duration (min):</strong><input type="text" name="duration${topicCount}" required></div>
+                <div><strong>Note:</strong><textarea name="note${topicCount}" required></textarea></div>
+            `;
+            topicsContainer.appendChild(topicItem);
+        });
+
+        document.getElementById('removeTopic').addEventListener('click', () => {
+            const topicsContainer = document.getElementById('topicsContainer');
+            if (topicsContainer.children.length > 1) {
+                topicsContainer.removeChild(topicsContainer.lastElementChild);
+            }
+        });
+
+        window.onload = loadProgress;
+    </script>
+
+</body>
+
+</html>
